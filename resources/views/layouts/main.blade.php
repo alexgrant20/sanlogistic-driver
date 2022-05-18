@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Sanlogistic | {{ $title }}</title>
+  <title>Sanlogistic-Driver | {{ $title }}</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="all,follow">
@@ -33,17 +33,15 @@
 <body>
   @include('partials.header')
   <div class="d-flex align-items-stretch">
-    @include('partials.sidebar')
 
     @yield('container')
 
-    @include('partials.footer')
   </div>
+  @include('partials.footer')
 
   <!-- JavaScript files-->
   <script src="{{ asset('/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <!-- Main File-->
-  <script src="{{ asset('/js/front.js') }}"></script>
   <script src="{{ asset('/js/function.js') }}"></script>
   {{-- Zoom JS --}}
   <script src="{{ asset('/vendor/zoom/zoom.js') }}"></script>
