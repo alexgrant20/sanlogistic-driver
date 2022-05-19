@@ -27,8 +27,16 @@
         <div class="col-xxl-3">
           <h2 class="fs-2">Sign in to continue</h2>
         </div>
+        @if (session()->has('error'))
+          <div class="col-xxl-3 mt-3">
+            <div class="alert alert-danger" role="alert">
+              {{ session('error') }}
+            </div>
+          </div>
+        @endif
       </div>
-      <form action="" method="POST" class="w-100 mt-3">
+      <form action="{{ url('/login') }}" method="POST" class="w-100 mt-3">
+        @csrf
         <div class="row flex-column align-items-center">
           <div class="col-xxl-3">
             <div class="mb-3 position-relative text-white">
@@ -41,7 +49,7 @@
           </div>
           <div class="col-xxl-3">
             <div class="mb-5 position-relative text-white">
-              <input type="text" class="w-100 ba-secondary border-none p-3 pe-5 rounded" placeholder="Password"
+              <input type="password" class="w-100 ba-secondary border-none p-3 pe-5 rounded" placeholder="Password"
                 name="password" id="password">
               <span class="position-absolute" style="top: 16px; right:20px;"><i class="fas fa-lg fa-key"></i></span>
             </div>

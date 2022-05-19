@@ -1,14 +1,14 @@
 <footer class="fixed-bottom shadow ba-secondary">
   <div class="row">
-    <a href="index.php"
-      class="col d-flex flex-column border-3 border-bottom justify-content-center align-items-center p-2 text-decoration-none text-white">
-      <i class="fas fa-lg fa-home mb-2"></i>
-      Home
+    <a href="/"
+      class="col {{ Request::is('/') ? 'border-primary' : '' }} d-flex flex-column border-3 border-bottom justify-content-center align-items-center p-2 text-decoration-none text-white">
+      <i class="bi {{ Request::is('/') ? 'bi-house-fill text-primary' : 'bi-house' }} mb-2 fs-3"></i>
+      <span class="{{ Request::is('/') ? 'fw-bold' : '' }}">Home</span>
     </a>
-    <a href="profile.php"
-      class="col d-flex flex-column border-3 border-bottom justify-content-center align-items-center p-2 text-decoration-none text-white">
-      <i class="fas fa-lg fa-user-cog mb-2"></i>
-      Profile
+    <a href="/profile"
+      class="col {{ Request::is('/profile') ? 'border-primary' : '' }} d-flex flex-column border-3 border-bottom justify-content-center align-items-center p-2 text-decoration-none text-white">
+      <i class="bi {{ Request::is('/profile') ? 'bi-person-fill text-primary' : 'bi-person' }} mb-2 fs-3"></i>
+      <span class="{{ Request::is('/profile') ? 'fw-bold' : '' }}">Profile</span>
     </a>
   </div>
 </footer>
