@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +20,9 @@ Route::post('/login', [AuthController::class, 'authenticate'])->middleware('gues
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
 
 Route::get('/', function () {
-    return view('index', [
-        'title' => 'Home'
-    ]);
+  return view('index', [
+    'title' => 'Home'
+  ]);
 })->middleware('auth');
+
+Route::resource('/activities', ActivityController::class)->middleware('auth');
