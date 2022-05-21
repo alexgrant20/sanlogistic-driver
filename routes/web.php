@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +28,5 @@ Route::get('/', function () {
 })->middleware('auth');
 
 Route::resource('/activities', ActivityController::class)->middleware('auth');
+Route::get('/vehicles/get/', [VehicleController::class, 'get'])->middleware('auth');
+Route::get('/addresses/get/', [AddressController::class, 'get'])->middleware('auth');

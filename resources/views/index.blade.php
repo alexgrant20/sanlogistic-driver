@@ -7,7 +7,7 @@
         <x-slot name="backgroundColor">{{ empty($_SESSION['activity_id']) ? 'bg-blue' : 'bg-green' }}</x-slot>
         <x-slot name="icon">{{ empty($_SESSION['activity_id']) ? 'bi-clipboard-plus-fill' : 'bi-flag' }}</x-slot>
         <x-slot name="text">Activity</x-slot>
-        <x-slot name="link">{{ empty($_SESSION['activity_id']) ? '#' : '#' }}</x-slot>
+        <x-slot name="link">{{ empty($_SESSION['activity_id']) ? '/activities/create' : '#' }}</x-slot>
       </x-menu-item>
       <x-menu-item>
         <x-slot name="backgroundColor">bg-brown</x-slot>

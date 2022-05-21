@@ -31,7 +31,7 @@
 
 <body class="min-vh-100 min-vw-100 bg-main">
   @include('partials.header')
-  <div class="d-flex p-5">
+  <div class="p-5" style="padding-bottom: 120px !important;">
 
     @yield('container')
 
