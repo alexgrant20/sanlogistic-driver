@@ -24,13 +24,14 @@
           <h4 class="text-blue">Vehicle Detail</h4>
           <hr>
           <div class="row g-3">
+            <input type="hidden" id="departure_location_id" name="departure_location_id">
             <div class="col-md-6">
               <label for="odo" class="form-label fs-5">Odometer Awal</label>
-              <input type="number" id="odo" class="form-control form-control-lg form-dark" disabled>
+              <input type="number" name="departure_odo" id="odo" class="form-control form-control-lg form-dark" readonly>
             </div>
             <div class="col-md-6">
-              <label for="dep_name" class="form-label fs-5">Lokasi Awal</label>
-              <input type="text" id="dep_name" class="form-control form-control-lg form-dark" disabled>
+              <label for="departure_location_name" class="form-label fs-5">Lokasi Awal</label>
+              <input type="text" id="departure_location_name" class="form-control form-control-lg form-dark" disabled>
             </div>
           </div>
         </div>
@@ -45,8 +46,9 @@
             </div>
 
             <div class="col-md-6">
-              <label for="arrival_id" class="form-label fs-5">Lokasi Akhir</label>
-              <select id="arrival_id" name="arrival_id" class="form-dark form-select form-select-lg" required>
+              <label for="arrival_location_id" class="form-label fs-5">Lokasi Akhir</label>
+              <select id="arrival_location_id" name="arrival_location_id" class="form-dark form-select form-select-lg"
+                required>
                 <option hidden>Select Location</option>
               </select>
             </div>
@@ -60,22 +62,23 @@
             <div class="col-md-6">
               <div class="d-flex flex-column">
                 <div class="mb-3">
-                  <label for="do_img" class="form-label fs-5">DO Image</label>
-                  <input class="form-control form-dark form-control-lg" id="do_img" name="do_img" type="file"
-                    accept="image/*" onchange="previewImage('do_img')" required>
+                  <label for="do_image" class="form-label fs-5">DO Image</label>
+                  <input class="form-control form-dark form-control-lg" id="do_image" name="do_image" type="file"
+                    accept="image/*" onchange="previewImage('do_image')" required>
                 </div>
-                <img src="{{ asset('/img/default.jpg') }}" style="height: 300px;" id="do_img-preview"
+                <img src="{{ asset('/img/default.jpg') }}" style="height: 300px;" id="do_image-preview"
                   class="img-fluid zoom m-auto d-block mw-100" alt="" data-action="zoom">
               </div>
             </div>
             <div class="col-md-6">
               <div class="d-flex flex-column">
                 <div class="mb-3">
-                  <label for="departure_odo_img" class="form-label fs-5">ODO Image</label>
-                  <input class="form-control form-dark form-control-lg" id="departure_odo_img" name="departure_odo_img"
-                    type="file" accept="image/*" onchange="previewImage('departure_odo_img')" required>
+                  <label for="departure_odo_image" class="form-label fs-5">ODO Image</label>
+                  <input class="form-control form-dark form-control-lg" id="departure_odo_image"
+                    name="departure_odo_image" type="file" accept="image/*" onchange="previewImage('departure_odo_image')"
+                    required>
                 </div>
-                <img src="{{ asset('/img/default.jpg') }}" style="height: 300px;" id="departure_odo_img-preview"
+                <img src="{{ asset('/img/default.jpg') }}" style="height: 300px;" id="departure_odo_image-preview"
                   class="img-fluid zoom m-auto d-block mw-100" alt="" data-action="zoom">
               </div>
             </div>

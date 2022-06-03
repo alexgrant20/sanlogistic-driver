@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Activity extends Model
 {
-  use HasFactory;
+  use HasFactory, Blameable;
 
   protected $guarded = ['id'];
 

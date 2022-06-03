@@ -44,19 +44,22 @@ $(document).ready(function () {
     request.done(function (response, textStatus, jqXHR) {
       const data = response;
 
+      console.log(response);
+
       $("#odo").val(data.odo);
-      $("#dep_name").val(data.address.name);
+      $("#departure_location_name").val(data.address.name);
+      $("#departure_location_id").val(data.address.id);
       $("#do_number").val(data.last_do_number);
 
       const req = $.ajax({
-        url: `/addresses/get?addressIdNot=${data.address_id}&projectId=${data.project_id}`,
+        url: `/addresses/get?addressIdNot=${data.address.id}&projectId=${data.project_id}`,
         type: "get",
       });
 
       req.done((res) => {
         const addressesData = res;
 
-        const arrivalSelect = $("#arrival_id");
+        const arrivalSelect = $("#arrival_location_id");
 
         arrivalSelect.empty();
 
