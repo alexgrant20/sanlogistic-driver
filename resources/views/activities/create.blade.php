@@ -8,7 +8,7 @@
   <input type="hidden" value="{{ auth()->user()->person->project_id }}" id="project_id">
 
   <form method="POST" action="{{ url('/activities') }}" class="px-3 needs-validation" id="myForm"
-    enctype="multipart/form-data" novalidate>
+    enctype="multipart/form-data">
     @csrf
     <div class="row g-5">
       <div class="col-xl-4">
@@ -44,13 +44,10 @@
               <label for="do_number" class="form-label fs-5">Nomor DO</label>
               <input type="text" id="do_number" name="do_number" class="form-control form-control-lg form-dark" required>
             </div>
-
             <div class="col-md-6">
               <label for="arrival_location_id" class="form-label fs-5">Lokasi Akhir</label>
               <select id="arrival_location_id" name="arrival_location_id" class="form-dark form-select form-select-lg"
-                required>
-                <option hidden>Select Location</option>
-              </select>
+                required></select>
             </div>
           </div>
         </div>
@@ -64,7 +61,7 @@
                 <div class="mb-3">
                   <label for="do_image" class="form-label fs-5">DO Image</label>
                   <input class="form-control form-dark form-control-lg" id="do_image" name="do_image" type="file"
-                    accept="image/*" onchange="previewImage('do_image')" required>
+                    accept=".png, .jpeg, .jpg" onchange="previewImage('do_image')" required>
                 </div>
                 <img src="{{ asset('/img/default.jpg') }}" style="height: 300px;" id="do_image-preview"
                   class="img-fluid zoom m-auto d-block mw-100" alt="" data-action="zoom">
@@ -75,8 +72,8 @@
                 <div class="mb-3">
                   <label for="departure_odo_image" class="form-label fs-5">ODO Image</label>
                   <input class="form-control form-dark form-control-lg" id="departure_odo_image"
-                    name="departure_odo_image" type="file" accept="image/*" onchange="previewImage('departure_odo_image')"
-                    required>
+                    name="departure_odo_image" type="file" accept=".png, .jpeg, .jpg"
+                    onchange="previewImage('departure_odo_image')" required>
                 </div>
                 <img src="{{ asset('/img/default.jpg') }}" style="height: 300px;" id="departure_odo_image-preview"
                   class="img-fluid zoom m-auto d-block mw-100" alt="" data-action="zoom">

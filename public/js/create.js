@@ -63,6 +63,8 @@ $(document).ready(function () {
 
         arrivalSelect.empty();
 
+        arrivalSelect.append($("<option hidden selected>"));
+
         addressesData.forEach((addressData) => {
           arrivalSelect.append(
             $("<option>")

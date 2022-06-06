@@ -82,10 +82,21 @@ class ActivityController extends Controller
     $data['user_id'] = auth()->user()->id;
     $data['project_id'] = Vehicle::where('id', $data['vehicle_id'])->first()->project_id;
 
-    $activity = Activity::create($data);
+    try {
+      DB::beginTransaction();
 
-    User::where('id', auth()->user()->id)->update(['last_activity_id' => $activity->id]);
-    ActivityStatus::create(['status' => 'draft', 'activity_id' => $activity->id]);
+      $activity = Activity::create($data);
+
+      User::where('id', auth()->user()->id)->update(['last_activity_id' => $activity->id]);
+      ActivityStatus::create(['status' => 'draft', 'activity_id' => $activity->id]);
+
+      $request->session()->put('activity_id', $activity->id);
+
+      DB::commit();
+    } catch (Exception $e) {
+      abort(500, "Server Error");
+    }
+    return redirect('/');
   }
 
   /**
@@ -107,7 +118,10 @@ class ActivityController extends Controller
    */
   public function edit(Activity $activity)
   {
-    //
+    return view('activities.edit', [
+      'title' => 'Update Activity',
+      'activity' => $activity,
+    ]);
   }
 
   /**
