@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Activity;
+use App\Models\ActivityPayment;
 use App\Models\ActivityStatus;
 use Illuminate\Support\Facades\DB;
 
@@ -19,6 +20,14 @@ class ActivityStatusObserver
     DB::beginTransaction();
 
     Activity::find($activityStatus->activity_id)->update(['activity_status_id' => $activityStatus->id]);
+
+    ActivityPayment::create([
+      'activity_status_id' => $activityStatus->id,
+      'bbm_amount' => 0,
+      'toll_amount' => 0,
+      'parking_amount' => 0,
+      'retribution_amount' => 0,
+    ]);
 
     DB::commit();
   }

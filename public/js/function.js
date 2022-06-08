@@ -24,3 +24,47 @@ function previewImage(id) {
     spinner.remove();
   }
 }
+
+const btnSpinnerOnClick = document.querySelectorAll('[button="spinOnClick"]');
+
+if (btnSpinnerOnClick.length > 0) {
+  btnSpinnerOnClick.forEach((e) => {
+    const id = `#${e.id}`;
+    const value = $(id).val();
+
+    $(id).on("click", (e) => {
+      let spinner = document.createElement("div");
+      spinner.className = "spinner-border m-auto";
+      $(id).text("Submitting..");
+      $(id).append(spinner);
+      $(id).submit();
+    });
+  });
+}
+
+const moneyElement = document.querySelectorAll('[data="money"]');
+
+if (moneyElement.length > 0) {
+  const moneyFormat = {
+    symbol: "Rp. ",
+    decimal: ",",
+    separator: ".",
+    precision: 0,
+  };
+
+  moneyElement.forEach((e) => {
+    const id = `#${e.id}`;
+
+    const value = $(id).val();
+
+    if (value) {
+      const formated = currency(value, moneyFormat).format();
+      $(id).val(formated);
+    }
+
+    $(id).on("keydown", (e) => {
+      const formated = currency(e.moneyElement.value, moneyFormat).format();
+      $(id).val(formated);
+    });
+  });
+}

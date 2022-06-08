@@ -38,6 +38,8 @@
   </div>
   @include('partials.footer')
 
+  <script src="{{ asset('/vendor/currency/currency.js') }}"></script>
+
   <!-- JavaScript files-->
   <script src="{{ asset('/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <!-- Main File-->

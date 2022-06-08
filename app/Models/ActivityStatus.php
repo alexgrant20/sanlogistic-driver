@@ -21,4 +21,9 @@ class ActivityStatus extends Model
   {
     return $this->belongsTo(User::class, 'created_by');
   }
+
+  public function activityPayment()
+  {
+    return $this->hasOne(ActivityPayment::class);
+  }
 }

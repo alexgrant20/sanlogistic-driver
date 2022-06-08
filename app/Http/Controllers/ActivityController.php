@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Activity;
 use App\Models\ActivityStatus;
+use App\Models\AddressProject;
 use App\Models\User;
 use App\Models\Vehicle;
 use Exception;
@@ -15,21 +16,11 @@ use Intervention\Image\Facades\Image;
 
 class ActivityController extends Controller
 {
-  /**
-   * Display a listing of the resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
   public function index()
   {
     //
   }
 
-  /**
-   * Show the form for creating a new resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
   public function create()
   {
     return view('activities.create', [
@@ -37,12 +28,6 @@ class ActivityController extends Controller
     ]);
   }
 
-  /**
-   * Store a newly created resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @return \Illuminate\Http\Response
-   */
   public function store(Request $request)
   {
     $validated = $request->validate([
@@ -94,54 +79,54 @@ class ActivityController extends Controller
 
       DB::commit();
     } catch (Exception $e) {
-      abort(500, "Server Error");
+      DB::rollBack();
+      abort(500, $e->getMessage());
     }
     return redirect('/');
   }
 
-  /**
-   * Display the specified resource.
-   *
-   * @param  \App\Models\Activity  $activity
-   * @return \Illuminate\Http\Response
-   */
   public function show(Activity $activity)
   {
     //
   }
 
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  \App\Models\Activity  $activity
-   * @return \Illuminate\Http\Response
-   */
   public function edit(Activity $activity)
   {
     return view('activities.edit', [
       'title' => 'Update Activity',
       'activity' => $activity,
+      'arrival_addresses' => AddressProject::where('address_id', '!=', $activity->departure_location_id)->where('project_id', $activity->project_id)->with('address')->get()
     ]);
   }
 
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  \App\Models\Activity  $activity
-   * @return \Illuminate\Http\Response
-   */
   public function update(Request $request, Activity $activity)
   {
-    //
+    $data = $request->validate([
+      'arrival_id' => 'required',
+      'arrival_odo' => 'required',
+      'arrival_odo_img' => 'required',
+      'bbm_amount' => 'required',
+      'toll_amount' => 'required',
+      'parking_amount' => 'required',
+      'bbm_img' => 'image',
+      'toll_img' => 'image',
+      'parking_img' => 'image',
+    ]);
+
+    $moneyTables = ['bbm', 'parking', 'toll'];
+
+    foreach ($moneyTables as $moneyTable) {
+      $amount = preg_replace("/[^0-9]/", "", $data[$moneyTable . "_amount"]);
+
+      if (
+        ($amount > 0 && !array_key_exists($moneyTable . "_img", $data)) ||
+        ($amount == 0 && array_key_exists($moneyTable . "_img", $data))
+      ) {
+        return redirect("/activities/{$activity->id}/edit")->withInput()->with('error', "Data invalid!");
+      }
+    }
   }
 
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  \App\Models\Activity  $activity
-   * @return \Illuminate\Http\Response
-   */
   public function destroy(Activity $activity)
   {
     //
